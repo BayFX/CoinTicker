@@ -17,7 +17,7 @@ class Display(object):
 
     def draw_content(self):
         font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 60)
-        self.__epd.draw_string_at(self.__frame_black, 60, 20, "240%", font, COLORED)
+        self.__epd.draw_string_at(self.__frame_black, 2, 20, "240%", font, COLORED)
 
     def update(self):
         self.reset_frames()
