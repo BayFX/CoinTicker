@@ -1,3 +1,4 @@
+import requests
 from PIL import ImageFont
 from waveshare_lib import epd2in13b
 
@@ -16,8 +17,9 @@ class Display(object):
         self.__frame_red = [0xFF] * (self.__epd.width * self.__epd.height / 8)
 
     def draw_content(self):
-        font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 60)
-        self.__epd.draw_string_at(self.__frame_black, 2, 20, "240%", font, COLORED)
+        gain = requests.get('http://gamble.franz-xaver-bayerl.de/gain.php')
+        font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 55)
+        self.__epd.draw_string_at(self.__frame_black, 0, 20, gain.text, font, COLORED)
 
     def update(self):
         self.reset_frames()

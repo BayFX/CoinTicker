@@ -1,7 +1,6 @@
 from setuptools import setup
 from setuptools import Command
 
-import subprocess
 from coin_ticker.display import Display
 
 class UpdateDisplayCommand(Command):
@@ -25,8 +24,8 @@ config = {
     'author_email': '',
     'version': '0.1',
     'tests_require': ['pylint'],
-    'setup_requires': ['setuptools-lint'],
-    'install_requires': ['nose'],
+    'setup_requires': ['setuptools-lint', 'requests'],
+    'install_requires': ['nose', 'requests'],
     'packages': ['coin_ticker'],
     'scripts': [],
     'name': 'Coin Ticker',
