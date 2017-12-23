@@ -1,5 +1,5 @@
 from PIL import ImageFont
-from coin_ticker.waveshare_lib import epd2in13b
+from waveshare_lib import epd2in13b
 
 COLORED = 1
 UNCOLORED = 0

@@ -1,0 +1,11 @@
+[Unit]
+Description=Coin Ticker
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/CoinTicker/app/coin_ticker/run.py
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target
