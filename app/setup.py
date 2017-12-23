@@ -1,8 +1,22 @@
+from setuptools import setup
+from setuptools import Command
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+import subprocess
+from coin_ticker.display import Display
+
+class UpdateDisplayCommand(Command):
+    user_options = []
+
+    def initialize_options(self):
+        """Abstract method that is required to be overwritten"""
+
+    def finalize_options(self):
+        """Abstract method that is required to be overwritten"""
+
+    def run(self):
+        print("Updating display ...")
+        display = Display() 
+        display.update()
 
 config = {
     'description': 'Monitor your cryptocoin portfolio on a raspberry pi e-ink display',
@@ -15,7 +29,8 @@ config = {
     'install_requires': ['nose'],
     'packages': ['coin_ticker'],
     'scripts': [],
-    'name': 'Coin Ticker'
+    'name': 'Coin Ticker',
+    'cmdclass': {'update_display': UpdateDisplayCommand},
 }
 
 setup(**config)

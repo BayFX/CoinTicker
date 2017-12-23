@@ -1,0 +1,3 @@
+[MASTER]
+ignore=coin_ticker/waveshare_lib
+disable=missing-docstring,no-self-use

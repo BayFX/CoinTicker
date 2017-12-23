@@ -1,3 +1,4 @@
 build
 .eggs
 Coin_Ticker.egg-info
+*.pyc
