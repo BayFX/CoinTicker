@@ -1,0 +1,11 @@
+# trades
+
+trades:
+  - name:       neo
+    symbol:     NEO
+    volume:     2
+    cost:       100
+  - name:       bitcoin
+    symbol:     BTC
+    volume:     0.5
+    cost:       3000
