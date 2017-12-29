@@ -3,8 +3,8 @@ from display import Display
 from data_source import DataSource
 
 class Updater(object):
-    def __init__(self):
-        self.__data_source = DataSource()
+    def __init__(self, config):
+        self.__data_source = DataSource(config)
         self.__display = Display()
         self.__running = False
 

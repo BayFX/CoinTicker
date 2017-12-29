@@ -4,7 +4,7 @@ After=multi-user.target
  
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /home/pi/CoinTicker/app/coin_ticker/run.py
+ExecStart=/usr/bin/python /home/pi/CoinTicker/app/coin_ticker/run.py /home/pi/CoinTicker/trades.yml
 Restart=on-abort
  
 [Install]

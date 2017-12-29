@@ -16,7 +16,7 @@ class UpdateDisplayCommand(Command):
     def run(self):
         print("Updating display ...")
         display = Display()
-        data_source = DataSource("./trades-example.yml")
+        data_source = DataSource("../trades.yml")
         data = data_source.get()
         display.update(data)
 

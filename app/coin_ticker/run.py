@@ -2,8 +2,10 @@
 
 from time import sleep
 from updater import Updater
+import sys
 
-UPDATER = Updater()
+config = sys.argv[1]
+UPDATER = Updater(config)
 
 try:
     print "Starting Coin Ticker"
