@@ -1,0 +1,17 @@
+- hosts: all
+  become: true
+  remote_user: pi
+  tasks:
+  - name: Check if cointicker is already installed
+    stat: path=/lib/systemd/system/cointicker.service
+    register: service_installed
+  - name: Stop cointicker
+    service: name=cointicker state=stopped
+    when: service_installed.stat.exists
+  - name: Copy cointicker
+    become: false
+    synchronize: src=./../../ dest=/home/pi/CoinTicker
+  - name: Install cointicker
+    command: sh /home/pi/CoinTicker/service/install.sh
+  - name: Ensure cointicker is running
+    service: name=cointicker state=started
