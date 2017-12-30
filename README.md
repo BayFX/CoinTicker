@@ -9,6 +9,8 @@ Monitor your cryptocoin portfolio on a raspberry pi e-ink display.
 * Micro SDHC card
 * USB power supply
 
+Assemble the Coin Ticker by [soldering](https://www.raspberrypi.org/blog/getting-started-soldering/) the display to the Raspberry Pi.
+
 ## Installation
 
 Here's how to install Coin Ticker on a Raspberry Pi Zero W using a MacOS host.
@@ -57,6 +59,6 @@ If you can think of other features or find bugs feel free to fork, open a PR or 
 
 Donations are always welcome :)
 
-Etherium: 0x0C9Da9FF04f0171Bc62a3c2142be0BBeE01bd488
-Neo: AHy4xYMW5nMFpRNEePP7eb73owKiLJHfy8
-Bitcoin: 1CN4omapW9X1AaodzqdecFyEvoTE8YoksB
+Etherium: 0x0C9Da9FF04f0171Bc62a3c2142be0BBeE01bd488   
+Neo: AHy4xYMW5nMFpRNEePP7eb73owKiLJHfy8   
+Bitcoin: 1CN4omapW9X1AaodzqdecFyEvoTE8YoksB   
