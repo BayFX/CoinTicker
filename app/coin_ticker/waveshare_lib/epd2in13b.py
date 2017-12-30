@@ -156,19 +156,19 @@ class EPD:
                     buf[(x + y * self.width) / 8] &= ~(0x80 >> (x % 8))
         return buf
 
-    def display_frame(self, frame_buffer_black, frame_buffer_red):
-        if (frame_buffer_black != None):
-            self.send_command(DATA_START_TRANSMISSION_1)           
-            self.delay_ms(2)
-            for i in range(0, self.width * self.height / 8):
-                self.send_data(frame_buffer_black[i])  
-            self.delay_ms(2)                  
+    def display_frame(self, frame_buffer_black, frame_buffer_red):                 
         if (frame_buffer_red != None):
             self.send_command(DATA_START_TRANSMISSION_2)
             self.delay_ms(2)
             for i in range(0, self.width * self.height / 8):
                 self.send_data(frame_buffer_red[i])  
             self.delay_ms(2)        
+        if (frame_buffer_black != None):
+            self.send_command(DATA_START_TRANSMISSION_1)           
+            self.delay_ms(2)
+            for i in range(0, self.width * self.height / 8):
+                self.send_data(frame_buffer_black[i])  
+            self.delay_ms(2) 
 
         self.send_command(DISPLAY_REFRESH)
         self.wait_until_idle()
@@ -236,10 +236,10 @@ class EPD:
         else:
             frame_buffer[(x + y * EPD_WIDTH) / 8] |= 0x80 >> (x % 8)
 
-    def draw_string_at(self, frame_buffer, x, y, text, font, colored):
+    def draw_string_at(self, frame_buffer, offset_x, offset_y, text, font, colored):
         image = Image.new('1', (self.height, self.width))
         draw = ImageDraw.Draw(image)
-        draw.multiline_text((x, y), text, font = font, fill = 255, align="right")
+        draw.multiline_text((0, 0), text, font = font, fill = 255, align="right")
         rotated = image.rotate(90.0, expand=1)
         # Set buffer to value of Python Imaging Library image.
         # Image must be in mode 1.
@@ -248,7 +248,7 @@ class EPD:
             for y in range(self.height):
                 # Set the bits for the column of pixels at the current position.
                 if pixels[x, y] != 0:
-                    self.set_pixel(frame_buffer, x, y, colored)
+                    self.set_pixel(frame_buffer, x + offset_x, y - offset_y, colored)
 
     def draw_line(self, frame_buffer, x0, y0, x1, y1, colored):
         # Bresenham algorithm

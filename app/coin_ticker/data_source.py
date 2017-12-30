@@ -1,6 +1,7 @@
 import requests
 import yaml
 import logging
+import datetime
 
 
 class Trade(object):
@@ -12,21 +13,22 @@ class Trade(object):
 
 
 class Data(object):
-    def __init__(self, gain, history):
+    def __init__(self, gain, timestamp):
         self.__gain = gain
-        self.__history = history
+        self.__timestamp = timestamp
 
     def gain(self):
         return self.__gain
 
-    def history(self):
-        return self.__history
+    def timestamp(self):
+        return self.__timestamp
 
 
 class DataSource(object):
     def __init__(self, config):
         self._logger = logging.getLogger(__name__)
         self.trades = self.load_trades(config)
+        self.__history = []
 
     def load_trades(self, config):
         self._logger.info('Loading trades from %s', config)
@@ -59,8 +61,15 @@ class DataSource(object):
             total_value += value
         total_profit = total_value - total_cost
         gain = (total_profit / total_cost) * 100.0
-        return Data(gain, [])
+        return Data(gain, datetime.datetime.now())
+
+    def add_to_history(self, data):
+        self.__history.append(data)
+        max_history = 50
+        if len(self.__history)>max_history:
+                self.__history = self.__history[:max_history]
 
     def get(self):
         data = self.calculate_data()
-        return data
+        self.add_to_history(data)
+        return self.__history
