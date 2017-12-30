@@ -11,7 +11,19 @@
   - name: Copy cointicker
     become: false
     synchronize: src=./../../ dest=/home/pi/CoinTicker
-  - name: Install cointicker
-    command: sh /home/pi/CoinTicker/service/install.sh
+  - name: Install pip
+    apt: name=python-pip state=present
+  - name: Install python-spidev
+    apt: name=python-spidev state=present
+  - name: Install libjpeg-dev
+    apt: name=libjpeg-dev state=present
+  - name: Install fonts-freefont-ttf
+    apt: name=fonts-freefont-ttf state=present
+  - name: Install app requirements
+    pip: requirements=/home/pi/CoinTicker/app/requirements.txt
+  - name: Install cointicker service
+    copy: src=./../service/cointicker.service dest=/lib/systemd/system/cointicker.service owner=root group=root mode=0755
+  - name: Ensure cointicker is starting on boot
+    service: name=cointicker enabled=yes
   - name: Ensure cointicker is running
     service: name=cointicker state=started
