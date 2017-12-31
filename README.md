@@ -1,12 +1,11 @@
 # Coin Ticker
 Monitor your cryptocoin portfolio on a raspberry pi e-ink display.
 
-Coin Ticker displays the [profit percentage](https://en.wikipedia.org/wiki/Profit_margin) and history of your cryptocoin portfolio on a e-ink display. The information is updated every 5 minutes.
-
-
 [![](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker1_small.jpg?raw=true)](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker1.jpg?raw=true)
 [![](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker2_small.jpg?raw=true)](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker2.jpg?raw=true)
 [![](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker3_small.jpg?raw=true)](https://raw.githubusercontent.com/RevaxZnarf/CoinTicker/resources/resources/cointicker3.jpg?raw=true)
+
+Coin Ticker displays the [profit percentage](https://en.wikipedia.org/wiki/Profit_margin) and history of your cryptocoin portfolio on a e-ink display. The information is updated every 5 minutes.
 
 ## Hardware
 
