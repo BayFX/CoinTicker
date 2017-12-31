@@ -20,7 +20,7 @@ class Display(object):
         self.__frame_red = [0xFF] * (self.__epd.width * self.__epd.height / 8)
 
     def draw_gain_number(self, data):
-        gain = data[0].gain()
+        gain = data[-1].gain()
         gain_str = '{:.0f}%'.format(gain)
         font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 55)
         x = 0
