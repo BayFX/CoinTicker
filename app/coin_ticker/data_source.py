@@ -67,7 +67,7 @@ class DataSource(object):
         self.__history.append(data)
         max_history = 50
         if len(self.__history)>max_history:
-                self.__history = self.__history[:max_history]
+                self.__history = self.__history[max_history:]
 
     def get(self):
         data = self.calculate_data()
