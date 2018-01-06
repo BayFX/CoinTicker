@@ -26,6 +26,7 @@ class Data(object):
 
 class DataSource(object):
     def __init__(self, config):
+        logging.basicConfig()
         self._logger = logging.getLogger(__name__)
         self.trades = self.load_trades(config)
         self.__history = []
@@ -43,22 +44,35 @@ class DataSource(object):
                                 trade['cost']))
         return trades
 
-    def fetch_coinmarketcap_prices(self, prices):
-        url = "https://api.coinmarketcap.com/v1/ticker"
-        raw_prices = requests.get(url).json()
-        for item in raw_prices:
-            prices[item['symbol']] = float(item['price_usd'])
+    def fetch_coin_prices(self):
+        prices = {}
+        required_symbols = map(lambda t: t.symbol, self.trades)
+        for symbol in required_symbols:
+            try:
+                url = "https://api.cryptonator.com/api/ticker/%s-usd" % symbol
+                response = requests.get(url)
+                response.raise_for_status()
+                responseJson = response.json()
+                if "ticker" in responseJson:
+                    prices[symbol] = float(responseJson["ticker"]["price"])
+                else:
+                    self._logger.error("Unable to fetch data for symbol %s", symbol)
+            except requests.exceptions.RequestException:
+                self._logger.exception('Unable to fetch symbol %s', symbol)
         return prices
 
     def calculate_data(self):
-        prices = self.fetch_coinmarketcap_prices({})
+        prices = self.fetch_coin_prices()
         total_value = 0
         total_cost = 0
         for trade in self.trades:
-            price = prices[trade.symbol]
-            value = trade.volume * price
-            total_cost += trade.cost
-            total_value += value
+            if (trade.symbol in prices):
+                price = prices[trade.symbol]
+                value = trade.volume * price
+                total_cost += trade.cost
+                total_value += value
+            else:
+                self._logger.error("No price available for %s", trade.symbol)
         total_profit = total_value - total_cost
         gain = (total_profit / total_cost) * 100.0
         return Data(gain, datetime.datetime.now())
@@ -66,7 +80,7 @@ class DataSource(object):
     def add_to_history(self, data):
         self.__history.append(data)
         max_history = 50
-        if len(self.__history)>max_history:
+        if len(self.__history) > max_history:
                 self.__history = self.__history[max_history:]
 
     def get(self):
