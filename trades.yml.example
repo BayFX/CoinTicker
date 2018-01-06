@@ -2,16 +2,16 @@ trades:
   coins:
     - name:       neo
       symbol:     NEO
-      volume:     10
-      cost:       25.36
+      volume:     0.00001
+      cost:       10.0
     - name:       bitcoin
       symbol:     BTC
-      volume:     0.149147
-      cost:       1322.48
+      volume:     0.00001
+      cost:       10.0
     - name:       etherium
       symbol:     ETH
-      volume:     0.6166608
-      cost:       100.68
+      volume:     0.00001
+      cost:       10.0
   stocks:
     -  name:       Apple
        symbol:     AAPL
